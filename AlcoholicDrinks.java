@@ -8,5 +8,8 @@
 public class AlcoholicDrinks extends Product implements Tax{ 
     private double taxLate; 
     private double alcohoilcTax;
-    
+    public int calculateTax(){ 
+    } 
+    public int getTotalPrice(){ 
+    } 
 }

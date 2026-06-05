@@ -6,5 +6,13 @@
  * @version (버전 번호 또는 작성한 날짜)
  */
 public class Beverages extends Product implements Tax{ 
-     private double taxLate; 
-}
+    private double taxLate; 
+    public void calculateTax(){
+        
+    
+        
+    } 
+    
+    
+    
+    }
