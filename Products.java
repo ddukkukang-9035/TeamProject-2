@@ -9,5 +9,5 @@ public abstract class Products
 {   
     private String productName;
     private int productPrice;
-    private Long barcodeNumber;
+    private long barcodeNumber;
 }
