@@ -7,7 +7,7 @@
  */
 public abstract class Products
 {   
-    private String productName;
-    private int productPrice;
-    private long barcodeNumber;
+    protected String productName;
+    protected int productPrice;
+    protected long barcodeNumber;
 }

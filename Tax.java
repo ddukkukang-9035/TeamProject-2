@@ -7,15 +7,9 @@
  */
 public interface Tax
 {
-    public int TAX{
-        
-    }
+    public static final float TAXRATE = 0.1f;     
     
-    public int calculateTax(){
-        
-    }
+    public abstract int calculateTax();
     
-    public int getTotalPrice(){
-        
-    }
+    public abstract int getTotalPrice();
 }
