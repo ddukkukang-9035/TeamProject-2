@@ -10,4 +10,8 @@ public abstract class Products
     protected String productName;
     protected int productPrice;
     protected long barcodeNumber;
+    
+    public long getBarcodeNumber() {
+        return this.barcodeNumber;
+    }
 }
