@@ -21,7 +21,11 @@ public class MyApp
             System.out.println("\n[새 고객] 상품을 스캔하세요.");
             System.out.println(post.printProducts());
             
-            
+            // Step 2~3: 바코드 스캔 반복
+            boolean scanning = true;
+            while (scanning) {
+                System.out.print("바코드 입력 (완료: 0) > ");
+                String input = sc.nextLine().trim();
     }
     
     
