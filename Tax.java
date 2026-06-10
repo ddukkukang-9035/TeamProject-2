@@ -7,9 +7,9 @@
  */
 public interface Tax
 {
-    public static final float TAXRATE = 0.1f;     
-    
-    public abstract int calculateTax();
-    
-    public abstract int getTotalPrice();
+    // 주류세 세율 상수 (주세법 기준)
+    double SOJU_TAX_RATE = 0.72;  // 소주: 72%
+    double BEER_TAX_RATE = 0.30;  // 맥주: 30%
+    double WHISKEY_TAX_RATE = 0.72;  // 위스키: 72%
+    double WINE_TAX_RATE = 0.30;  // 와인: 30%
 }
