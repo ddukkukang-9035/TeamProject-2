@@ -12,4 +12,10 @@ public interface Tax
     double BEER_TAX_RATE = 0.30;  // 맥주: 30%
     double WHISKEY_TAX_RATE = 0.72;  // 위스키: 72%
     double WINE_TAX_RATE = 0.30;  // 와인: 30%
+    
+    /**
+     * 주류세 계산 메소드 (구현 클래스에서 반드시 오버라이딩)
+     * @return 세금 금액 (원)
+     */
+    int calcTax();
 }
