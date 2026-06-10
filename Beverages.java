@@ -19,4 +19,23 @@ public class Beverages extends Products{
         addToDB(new Beverages("B002", "포카리스웨트", "이온음료", 1800, 1));
         addToDB(new Beverages("B003", "제주삼다수", "생수",900, 1));
     }
+    
+    /**
+     * 최종 지불 금액 = 기본가격 × 수량 (세금 없음)
+     * @return 최종 금액 (원)
+     */
+    @Override
+    public int calcAmount() {
+        return getPrice() * getQuantity();
+    }
+
+    /**
+     * 음료수 상품 정보 출력
+     */
+    @Override
+    public void printInfo() {
+        System.out.println("[음료] " + getName() + " | 단가: " + getPrice() + "원" + " | 수량: " + getQuantity() + " | 카테고리: " + category + " | 합계: " + calcAmount() + "원");
+    }
+
+    public String getCategory() { return category; }
 }
