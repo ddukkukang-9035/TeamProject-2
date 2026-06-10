@@ -5,33 +5,12 @@
  * @author (작성자 이름)
  * @version (버전 번호 또는 작성한 날짜)
  */
-public class Beverages extends Products implements Tax{
-
-    /**
-     * 메소드 예제 - 사용자에 맞게 주석을 바꾸십시오.
-     *
-     * @param  y  메소드의 샘플 파라미터
-     * @return    x 와 y의 합
-     */
-    public Beverages(String productName, int productPrice, long barcodeNumber){
-        this.barcodeNumber = barcodeNumber;
-        this.productName = productName;
-        this.productPrice = productPrice;
-    }
-
-    /**
-     * 메소드 예제 - 사용자에 맞게 주석을 바꾸십시오.
-     *
-     * @param  y  메소드의 샘플 파라미터
-     * @return    x 와 y의 합
-     */
-    @Override
-    public int calculateTax(){
-        return (int)(productPrice*TAXRATE);
-    }
+public class Beverages extends Products{
+    private String category;
     
-    @Override
-    public int getTotalPrice(){
-        return productPrice + calculateTax();
+    public Beverages(String barcode, String name, String category,
+                     int price, int quantity) {
+        super(barcode, name, price, quantity);
+        this.category = category;
     }
 }
