@@ -75,10 +75,10 @@ public class POST {
     public void calcTotalAmount() {
         int total = 0;
         int[] prices = cartItems.getCartPrices();
-        int[] qtys = cartItems.getQuantities();
+        int[] counts = cartItems.getQuantities();
         int itemCount = cartItems.getItemCount();
         for (int i = 0; i < itemCount; i++) {
-            total += prices[i] * qtys[i];
+            total += prices[i] * counts[i];
         }
         cartItems.setTotalAmount(total);
     }
