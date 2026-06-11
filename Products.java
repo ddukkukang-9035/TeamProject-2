@@ -14,7 +14,6 @@ public abstract class Products
     protected long barcode;
     protected String name;
     protected int price;
-    protected int quantity;
 
     /** 
      * 상품DB에 상품 등록

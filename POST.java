@@ -95,7 +95,7 @@ public class POST {
         int total = 0;
         int[] prices = cartItems.getItemPrices();
         int[] counts = cartItems.getCounts();
-        int inCartItemCount = cartItems.getItemCount();
+        int inCartItemCount = cartItems.getInCartItemCount();
         for (int i = 0; i < inCartItemCount; i++) {
             total += prices[i] * counts[i];
         }

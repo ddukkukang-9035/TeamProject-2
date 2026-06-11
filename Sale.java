@@ -100,7 +100,7 @@ public class Sale {
         return change;        
     }
 
-    public int getItemCount(){
+    public int getInCartItemCount(){
         return inCartItemCount;   
     }
 
