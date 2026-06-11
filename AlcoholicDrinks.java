@@ -38,7 +38,7 @@ public class AlcoholicDrinks extends Products implements TAX{
     }
 
     public int getVAT() {
-        return (int)(getPrice() * VAT);
+        return (int)(getPrice() * VATRATE);
     }
 
     @Override

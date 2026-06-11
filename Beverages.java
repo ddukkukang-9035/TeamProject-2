@@ -48,7 +48,7 @@ public class Beverages extends Products implements TAX{
      */
     @Override
     public int calcTax() {
-        int result = (int)(getPrice() * VAT);
+        int result = (int)(getPrice() * VATRATE);
         return result;
     }
 

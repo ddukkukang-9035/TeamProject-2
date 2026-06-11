@@ -8,7 +8,7 @@ public interface TAX {
     double SOJUTAXRATE = 0.72;
     double BEERTAXRATE = 0.30;
     double WHISKEYTAXRATE = 0.72;
-    double VAT = 0.1;
+    double VATRATE = 0.1;
 
     /**
      * 주류세 계산 메소드 (구현 클래스에서 반드시 오버라이딩)
