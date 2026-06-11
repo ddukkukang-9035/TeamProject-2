@@ -1,11 +1,9 @@
 /**
- * Sale Class
- * 한 건의 판매 트랜잭션 정보를 담는 클래스
+ * Sale 클래스의 설명을 작성하세요.
  *
- * [판매DB 책임]
- *   완료된 Sale 객체를 static saleDB 배열에 직접 저장·관리한다.
- *   POST는 Sale.saveToDB() / Sale.printSaleDB() 를 호출하기만 한다.
- */  
+ * @author (작성자 이름)
+ * @version (버전 번호 또는 작성한 날짜)
+ */
 public class Sale { 
     private static final int SALEDB_MAX  = 100;
     private static Sale[] saleDB = new Sale[SALEDB_MAX];
@@ -18,15 +16,15 @@ public class Sale {
 
     /**
      * 완료된 Sale 객체를 saleDB에 저장한다.
-     * UCDesc [Line 11] — "시스템은 Sale정보를 SaleDB에 저장한다."
+     * UCDesc Line 11 — "시스템은 Sale정보를 SaleDB에 저장한다."
      * @param sale 저장할 Sale 객체
      */ 
     public static void saveTODB(Sale sale){  
         if(saleCount < SALEDB_MAX) { 
             saleDB[saleCount] = sale; 
             saleCount++; 
-            System.out.println("[시스템] Sale 정보가 SaleDB에 저장되었습니다." 
-                + "(누적 판매 건수: " + saleCount + "건)");} 
+            System.out.println("[시스템] Sale 정보가 SaleDB에 저장되었습니다." 
+                + "(누적 판매 건수: " + saleCount + "건)");} 
         else { 
             System.out.println("[경고] SaleDB가 가득 찼습니다.");
         }
@@ -70,7 +68,7 @@ public class Sale {
 
     /**
      * 이번 판매 목록에 상품을 추가한다.
-     * @param product 추가할 상품 객체
+     * @param product : 추가할 상품 객체
      * @return 추가 성공 여부
      */
     public boolean addProduct(Products product) {
@@ -94,7 +92,7 @@ public class Sale {
 
     /**
      * 거스름돈을 계산하고 change 필드에 저장한다.
-     * @param paid 고객이 낸 현금
+     * @param paid : 고객이 낸 현금
      * @return 거스름돈 (음수면 현금 부족)
      */
     public int calcChange(int paid) {
