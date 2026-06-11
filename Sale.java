@@ -34,17 +34,6 @@ public class Sale {
     }
 
     /**
-     * 거스름돈을 계산하고 change 필드에 저장한다.
-     * @param paid : 고객이 낸 현금
-     * @return 거스름돈
-     */
-    public int calcChange(int paid) {
-        this.paidCash = paid;
-        this.change = paid - totalAmount;
-        return this.change;
-    }
-
-    /**
      * 이번 판매의 영수증을 출력한다.
      * UCDesc Line 9 — 영수증 발급
      */

@@ -1,4 +1,3 @@
-
 /**
  * Product 클래스의 설명을 작성하세요.
  *
@@ -15,14 +14,6 @@ public abstract class Products
     protected String name;
     protected int price;
     protected int quantity;
-    
-    /**
-     * 판매 가능한 상품을 productDB에 등록한다.
-     */
-    public static void initProductDB(){
-        AlcoholicDrinks.initDB();
-        Beverages.initDB();
-    }
 
     /** 
      * 상품DB에 상품 등록
