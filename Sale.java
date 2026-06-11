@@ -31,22 +31,12 @@ public class Sale {
     }
 
     /**
-     * 이번 판매 목록에 상품을 추가한다.
-     * @param product : 추가할 상품 객체
-     * @return 추가 성공
-     */
-    public boolean addProduct(Products product) {
-        cart[itemCount++] = product;
-        return true;
-    }
-
-    /**
      * 담긴 모든 상품의 금액을 합산하여 totalAmount를 갱신한다.
      */
     public void calcTotalAmount() {
         totalAmount = 0;
         for (int i = 0; i < itemCount; i++) {
-            totalAmount += cart[i].calcAmount();
+            totalAmount += cart[i].calcAmount() * quantities[i];
         }
     }
 
@@ -68,8 +58,7 @@ public class Sale {
     public void printReceipt() {
         System.out.println("-------- 영수증 --------");
         for (int i = 0; i < itemCount; i++) {
-            System.out.print("  ");
-            cart[i].printInfo();
+            System.out.println(cart[i].getName() + " | 단가: " + cart[i].getPrice() + "원 | 수량: " + quantities[i] + " | 금액: " + (cart[i].calcAmount() * quantities[i]) + "원");
         }
         System.out.println("------------------------");
         System.out.println("총 금액  : " + totalAmount + "원");
@@ -79,12 +68,12 @@ public class Sale {
     }
 
     public static void saveDB(Sale sale) {
-            saleDB[saleCount] = sale;
-            saleCount++;
-            System.out.println("[시스템] Sale 정보가 SaleDB에 저장되었습니다."
-                + "(누적 판매 건수: " + saleCount + "건)");
+        saleDB[saleCount] = sale;
+        saleCount++;
+        System.out.println("[시스템] Sale 정보가 SaleDB에 저장되었습니다."
+            + "(누적 판매 건수: " + saleCount + "건)");
     }
-    
+
     /**
      * 완료된 Sale 객체를 saleDB에 저장한다.
      * UCDesc Line 11 — 시스템은 Sale정보를 SaleDB에 저장한다.

@@ -7,9 +7,10 @@
  */
 public abstract class Products
 {   
-    protected static final int DB_MAX = 20;
-    protected static Products[] productDB = new Products[DB_MAX];
+    protected static final int DBMAX = 100;
+    protected static Products[] productDB = new Products[DBMAX];
     protected static int dbCount  = 0;
+    
     protected long barcode;
     protected String name;
     protected int price;
@@ -25,7 +26,7 @@ public abstract class Products
      * 상품DB에 상품 추가
      */
     protected static void addToDB(Products p) {
-        if (dbCount < DB_MAX) {
+        if (dbCount < DBMAX) {
             productDB[dbCount++] = p;
         }
     }
