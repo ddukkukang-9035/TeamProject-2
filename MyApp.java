@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class MyApp {
 
     public static void main(String[] args) {
-
+        Products.initProductDB();  // 상품 DB 초기화
         POST post = new POST();
         Scanner scanner = new Scanner(System.in);
         int menu;
@@ -18,10 +18,8 @@ public class MyApp {
 
         while (true) {
             System.out.println("\n[메뉴]");
-            System.out.println("  1. 상품 목록 보기  (ProductDB)");
-            System.out.println("  2. 판매 시작");
-            System.out.println("  3. 판매 내역 보기  (SaleDB)");
-            System.out.println("  0. 종료");
+            System.out.println("1. 판매 시작");
+            System.out.println("0. 종료");
             System.out.print("선택: ");
             menu = scanner.nextInt();
 

@@ -73,14 +73,16 @@ public abstract class Products
      */
     public abstract int calcAmount();
     
-        /** 
+    /** 
      * 상품 정보 한 줄 출력 
      */
     public abstract void printInfo();
     
-        /**
+    /**
      * 판매 가능한 상품을 productDB에 등록한다.
-     * 추상메서드
      */
-    public static void initDB();
+    public static void initProductDB(){
+        AlcoholicDrinks.initDB();
+        Beverages.initDB();
+    }
 }

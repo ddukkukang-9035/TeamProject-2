@@ -16,7 +16,6 @@ public class AlcoholicDrinks extends Products implements Tax{
         this.drinkType = drinkType;
     }
 
-    @Override
     public static void initDB() {
         addToDB(new AlcoholicDrinks(880000000001L, "참이슬", AlcoholicDrinks.SOJU,1800));
         addToDB(new AlcoholicDrinks(880000000002L, "카스", AlcoholicDrinks.BEER,2500));
@@ -30,23 +29,19 @@ public class AlcoholicDrinks extends Products implements Tax{
      */
     @Override
     public int calcTax() {
-        int base = getPrice();
+        int alcoholTax = 0;
 
-        if (drinkType.equals(SOJU)) {
-            base = (int)(base * SOJUTAXRATE);
-            return base;
-        } else if (drinkType.equals(BEER)) {
-            base = (int)(base * BEERTAXRATE);
-            return base;
-        } else if (drinkType.equals(WHISKEY)) {
-            base = (int)(base * WHISKEYTAXRATE);
-            return base;
-        } else if (drinkType.equals(WINE)) {
-            base = (int)(base * WINETAXRATE);
-            return base;
-        } else {
-            return 0;
-        }
+        if (drinkType.equals(SOJU)) 
+            alcoholTax = (int)(getPrice() * SOJUTAXRATE);
+        else if (drinkType.equals(BEER)) 
+            alcoholTax = (int)(getPrice() * BEERTAXRATE);
+        else if (drinkType.equals(WHISKEY)) 
+            alcoholTax = (int)(getPrice() * WHISKEYTAXRATE);
+        else if (drinkType.equals(WINE)) 
+            alcoholTax = (int)(getPrice() * WINETAXRATE);
+
+        int vat = (int)(getPrice() * VAT);
+        return alcoholTax + vat;
     }
 
     /**
@@ -67,7 +62,9 @@ public class AlcoholicDrinks extends Products implements Tax{
         System.out.println("[주류] " + getName() + " | 단가: " + getPrice() + "원" + " | 수량: " + " | 주류종류: " + drinkType + " | 세율: " + (int)(getTaxRate() * 100) + "%" + " | 주류세: " + calcTax() + "원" + " | 합계: " + calcAmount() + "원");
     }
 
-    public String getDrinkType() { return drinkType; }
+    public String getDrinkType() {
+        return drinkType; 
+    }
 
     /**
      * 현재 주류 종류의 세율 반환

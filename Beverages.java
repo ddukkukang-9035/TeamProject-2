@@ -10,7 +10,6 @@ public class Beverages extends Products implements Tax{
         super(barcode, name, price);
     }
 
-    @Override
     public static void initDB(){
         addToDB(new Beverages(880000000004L, "코카콜라", 1500));
         addToDB(new Beverages(880000000005L, "포카리스웨트", 1800));
@@ -41,8 +40,7 @@ public class Beverages extends Products implements Tax{
      * @return    x 와 y의 합
      */
     @Override
-    public int calcTax()
-    {
+    public int calcTax(){
         int base = (int)(getPrice() * VAT);
         return base;
     }

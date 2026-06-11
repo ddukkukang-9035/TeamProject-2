@@ -5,30 +5,47 @@
  * @version (버전 번호 또는 작성한 날짜)
  */
 public class Sale { 
-    private static final int SALEDB_MAX  = 100;
-    private static Sale[] saleDB = new Sale[SALEDB_MAX];
+    private static final int SALEDBMAX  = 100;
+    private static Sale[] saleDB = new Sale[SALEDBMAX];
     private static int saleCount   = 0;
-    private Products[] items;
+    private Products[] cart;
+    private int[] quantities;
     private int itemCount;
     private int totalAmount;
     private int paidCash;
     private int change; 
 
     /**
+     * 메소드 예제 - 사용자에 맞게 주석을 바꾸십시오.
+     *
+     * @param  y  메소드의 샘플 파라미터
+     * @return    x 와 y의 합
+     */
+    public Sale(int maxItems) {
+        cart = new Products[maxItems];
+        quantities = new int[maxItems];
+        itemCount = 0;
+        totalAmount = 0;
+        paidCash = 0;
+        change = 0;
+    }
+
+    /**
      * 완료된 Sale 객체를 saleDB에 저장한다.
      * UCDesc Line 11 — "시스템은 Sale정보를 SaleDB에 저장한다."
-     * @param sale 저장할 Sale 객체
+     * 
+     * @param 
      */ 
-    public static void saveTODB(Sale sale){  
-        if(saleCount < SALEDB_MAX) { 
-            saleDB[saleCount] = sale; 
-            saleCount++; 
-            System.out.println("[시스템] Sale 정보가 SaleDB에 저장되었습니다." 
-                + "(누적 판매 건수: " + saleCount + "건)");} 
-        else { 
-            System.out.println("[경고] SaleDB가 가득 찼습니다.");
+    public boolean addProduct(Products product, int qty) {
+        if (itemCount >= cart.length) {
+            System.out.println("[오류] 더 이상 상품을 추가할 수 없습니다.");
+            return false;
         }
-    } 
+        cart[itemCount] = product;
+        quantities[itemCount] = qty;
+        itemCount++;
+        return true;
+    }
 
     /**
      * saleDB에 저장된 모든 판매 내역을 출력한다.
@@ -55,28 +72,17 @@ public class Sale {
         return saleCount; 
     }
 
-    /** 
-     * 판매정보 저장
-     */
-    public Sale(int maxItems) {
-        items       = new Products[maxItems];
-        itemCount   = 0;
-        totalAmount = 0;
-        paidCash    = 0;
-        change      = 0;
-    }
-
     /**
      * 이번 판매 목록에 상품을 추가한다.
      * @param product : 추가할 상품 객체
      * @return 추가 성공 여부
      */
     public boolean addProduct(Products product) {
-        if (itemCount >= items.length) {
+        if (itemCount >= cart.length) {
             System.out.println("[오류] 더 이상 상품을 추가할 수 없습니다.");
             return false;
         }
-        items[itemCount++] = product;
+        cart[itemCount++] = product;
         return true;
     }
 
@@ -86,7 +92,7 @@ public class Sale {
     public void calcTotalAmount() {
         totalAmount = 0;
         for (int i = 0; i < itemCount; i++) {
-            totalAmount += items[i].calcAmount();
+            totalAmount += cart[i].calcAmount();
         }
     }
 
@@ -109,7 +115,7 @@ public class Sale {
         System.out.println("-------- 영수증 --------");
         for (int i = 0; i < itemCount; i++) {
             System.out.print("  ");
-            items[i].printInfo();
+            cart[i].printInfo();
         }
         System.out.println("------------------------");
         System.out.println("총 금액  : " + totalAmount + "원");
@@ -118,13 +124,34 @@ public class Sale {
         System.out.println("------------------------");
     }
 
-    public int        getTotalAmount() { return totalAmount; }
+    public static void saveDB(Sale sale) {
+        if (saleCount < SALEDBMAX) {
+            saleDB[saleCount] = sale;
+            saleCount++;
+            System.out.println("[시스템] Sale 정보가 SaleDB에 저장되었습니다."
+                + "(누적 판매 건수: " + saleCount + "건)");
+        } else {
+            System.out.println("[경고] SaleDB가 가득 찼습니다.");
+        }
+    }
 
-    public int        getPaidCash()    { return paidCash;    }
+    public int getTotalAmount(){ 
+        return totalAmount; 
+    }
 
-    public int        getChange()      { return change;      }
+    public int getPaidCash(){
+        return paidCash;    
+    }
 
-    public int        getItemCount()   { return itemCount;   }
+    public int getChange(){
+        return change;      
+    }
 
-    public Products[] getItems()       { return items;       }
+    public int getItemCount(){
+        return itemCount;  
+    }
+
+    public Products[] getItems(){
+        return cart;       
+    }
 }
