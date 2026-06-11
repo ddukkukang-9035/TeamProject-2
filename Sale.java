@@ -13,7 +13,7 @@ public class Sale {
     private int[] itemPrices;
     private int[] taxes;
     private int[] counts;
-    private int itemCount;
+    private int inCartItemCount;
     private int totalAmount;
     private int paidCash;
     private int change;
@@ -28,7 +28,7 @@ public class Sale {
         itemPrices = new int[maxItems];
         taxes = new int[maxItems];
         counts = new int[maxItems];
-        itemCount = 0;
+        inCartItemCount = 0;
         totalAmount = 0;
         paidCash = 0;
         change = 0;
@@ -41,12 +41,12 @@ public class Sale {
      */
     public void printReceipt() {
         System.out.println("-------- 영수증 --------");
-        for (int i = 0; i < itemCount; i++) {
+        for (int i = 0; i < inCartItemCount; i++) {
             System.out.println("  " + cartNames[i] + " | 단가: " + itemPrices[i] + "원 | 수량: " + counts[i] + " | 금액: " + (itemPrices[i] * counts[i]) + "원");
         }
         System.out.println("------------------------");
         int totalTax = 0;
-        for (int i = 0; i < itemCount; i++) {
+        for (int i = 0; i < inCartItemCount; i++) {
             totalTax += taxes[i] * counts[i];
         }
         int taxableAmount = totalAmount - totalTax;
@@ -80,11 +80,11 @@ public class Sale {
      * @return 추가 성공 여부
      */
     public boolean addProduct(String name, int price, int tax, int count) {
-        cartNames[itemCount] = name;
-        itemPrices[itemCount] = price;
-        taxes[itemCount] = tax;
-        counts[itemCount] = count;
-        itemCount++;
+        cartNames[inCartItemCount] = name;
+        itemPrices[inCartItemCount] = price;
+        taxes[inCartItemCount] = tax;
+        counts[inCartItemCount] = count;
+        inCartItemCount++;
         return true;
     }
 
@@ -101,7 +101,7 @@ public class Sale {
     }
 
     public int getItemCount(){
-        return itemCount;   
+        return inCartItemCount;   
     }
 
     public int[] getItemPrices() { 
