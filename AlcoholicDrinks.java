@@ -1,25 +1,28 @@
 /**
- * AlcoholicDrinks Class
- * Products를 상속하고 TAX 인터페이스를 구현하는 주류 클래스
- * 지원 주류: 소주(SOJU), 맥주(BEER), 위스키(WHISKEY), 와인(WINE)
+ * AlcoholicDrinks 클래스의 설명을 작성하세요.
+ *
+ * @author (작성자 이름)
+ * @version (버전 번호 또는 작성한 날짜)
  */
-public class AlcoholicDrinks extends Products implements TAX {
+public class AlcoholicDrinks extends Products implements Tax{
     public static final String SOJU = "소주";
     public static final String BEER = "맥주";
     public static final String WHISKEY = "위스키";
     public static final String WINE = "와인";
     private String drinkType;
 
-    public AlcoholicDrinks(String barcode, String name, String drinkType,
-                           int price, int quantity) {
-        super(barcode, name, price, quantity);
+    public AlcoholicDrinks(long barcode, String name, String drinkType, int price) {
+        super(barcode, name, price);
         this.drinkType = drinkType;
     }
-    public static void initDB() {
-        addToDB(new AlcoholicDrinks("A001", "참이슬", AlcoholicDrinks.SOJU,1800,1));
-        addToDB(new AlcoholicDrinks("A002", "카스", AlcoholicDrinks.BEER,2500,1));
-        addToDB(new AlcoholicDrinks("A003", "발렌타인", AlcoholicDrinks.WHISKEY,45000,1)); 
+
+    @Override
+    public void initDB() {
+        addToDB(new AlcoholicDrinks(880000000001L, "참이슬", AlcoholicDrinks.SOJU,1800));
+        addToDB(new AlcoholicDrinks(880000000002L, "카스", AlcoholicDrinks.BEER,2500));
+        addToDB(new AlcoholicDrinks(880000000003L, "발렌타인", AlcoholicDrinks.WHISKEY,45000)); 
     }
+
     /**
      * 주류세 계산 (주세법 기준 세율 적용)
      * 과세표준 = 기본가격 × 수량
@@ -27,16 +30,20 @@ public class AlcoholicDrinks extends Products implements TAX {
      */
     @Override
     public int calcTax() {
-        int base = getPrice() * getQuantity();
+        int base = getPrice();
 
         if (drinkType.equals(SOJU)) {
-            return (int)(base * SOJU_TAX_RATE);
+            base = (int)(base * SOJUTAXRATE);
+            return base;
         } else if (drinkType.equals(BEER)) {
-            return (int)(base * BEER_TAX_RATE);
+            base = (int)(base * BEERTAXRATE);
+            return base;
         } else if (drinkType.equals(WHISKEY)) {
-            return (int)(base * WHISKEY_TAX_RATE);
+            base = (int)(base * WHISKEYTAXRATE);
+            return base;
         } else if (drinkType.equals(WINE)) {
-            return (int)(base * WINE_TAX_RATE);
+            base = (int)(base * WINETAXRATE);
+            return base;
         } else {
             return 0;
         }
@@ -48,7 +55,7 @@ public class AlcoholicDrinks extends Products implements TAX {
      */
     @Override
     public int calcAmount() {
-        int base = getPrice() * getQuantity();
+        int base = getPrice();
         return base + calcTax();
     }
 
@@ -57,7 +64,7 @@ public class AlcoholicDrinks extends Products implements TAX {
      */
     @Override
     public void printInfo() {
-        System.out.println("[주류] " + getName() + " | 단가: " + getPrice() + "원" + " | 수량: " + getQuantity() + " | 주류종류: " + drinkType + " | 세율: " + (int)(getTaxRate() * 100) + "%" + " | 주류세: " + calcTax() + "원" + " | 합계: " + calcAmount() + "원");
+        System.out.println("[주류] " + getName() + " | 단가: " + getPrice() + "원" + " | 수량: " + " | 주류종류: " + drinkType + " | 세율: " + (int)(getTaxRate() * 100) + "%" + " | 주류세: " + calcTax() + "원" + " | 합계: " + calcAmount() + "원");
     }
 
     public String getDrinkType() { return drinkType; }
@@ -67,9 +74,9 @@ public class AlcoholicDrinks extends Products implements TAX {
      */
     public double getTaxRate() {
         if (drinkType.equals(SOJU) || drinkType.equals(WHISKEY)) {
-            return SOJU_TAX_RATE;
+            return SOJUTAXRATE;
         } else {
-            return BEER_TAX_RATE;
+            return BEERTAXRATE;
         }
     }
 }

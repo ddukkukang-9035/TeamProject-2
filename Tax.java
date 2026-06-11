@@ -7,13 +7,14 @@
  */
 public interface Tax
 {
-    double SOJU_TAX_RATE = 0.72;
-    double BEER_TAX_RATE = 0.30;
-    double WHISKEY_TAX_RATE = 0.72;
-    double WINE_TAX_RATE = 0.30;
+    double SOJUTAXRATE = 0.72;
+    double BEERTAXRATE = 0.30;
+    double WHISKEYTAXRATE = 0.72;
+    double WINETAXRATE = 0.30;
+    double VAT = 0.1;
     
     /**
-     * 주류세 계산 메소드 (구현 클래스에서 반드시 오버라이딩)
+     * 세금 계산 메소드
      * @return 세금 금액 (원)
      */
     int calcTax();
