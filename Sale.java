@@ -44,13 +44,12 @@ public class Sale {
      * 
      * @return 추가 성공 여부
      */
-    public boolean addProduct(String name, int price, int tax, int count) {
+    public void addProduct(String name, int price, int tax, int count) {
         cartNames[inCartItemCount] = name;
         itemPrices[inCartItemCount] = price;
         taxes[inCartItemCount] = tax;
         counts[inCartItemCount] = count;
         inCartItemCount++;
-        return true;
     }
     
         /**
