@@ -48,6 +48,10 @@ public class POST {
         int count = scanner.nextInt();
         cartItems.addProduct(found.getName(), found.getPrice(), count);
         System.out.println("[추가됨] " + found.getName() + " × " + count + "개");
+        
+        if (found instanceof TAX) {
+        TAX taxable = (TAX) found;
+        }
         return true;
     } 
 
