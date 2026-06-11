@@ -35,6 +35,25 @@ public class Sale {
     }
 
     /**
+     * 장바구니에 상품을 추가한다.
+     * 
+     * @param name : 상품명
+     *        price : 단가
+     *        tax : 세금
+     *        count : 수량
+     * 
+     * @return 추가 성공 여부
+     */
+    public boolean addProduct(String name, int price, int tax, int count) {
+        cartNames[inCartItemCount] = name;
+        itemPrices[inCartItemCount] = price;
+        taxes[inCartItemCount] = tax;
+        counts[inCartItemCount] = count;
+        inCartItemCount++;
+        return true;
+    }
+    
+        /**
      * 이번 판매의 영수증을 출력한다
      * UCDesc Line 9 — 영수증 발급
      * 
@@ -56,25 +75,6 @@ public class Sale {
         System.out.println("받은 현금   : " + paidCash + "원");
         System.out.println("거스름돈    : " + change + "원");
         System.out.println("------------------------");
-    }
-
-    /**
-     * 장바구니에 상품을 추가한다.
-     * 
-     * @param name : 상품명
-     *        price : 단가
-     *        tax : 세금
-     *        count : 수량
-     * 
-     * @return 추가 성공 여부
-     */
-    public boolean addProduct(String name, int price, int tax, int count) {
-        cartNames[inCartItemCount] = name;
-        itemPrices[inCartItemCount] = price;
-        taxes[inCartItemCount] = tax;
-        counts[inCartItemCount] = count;
-        inCartItemCount++;
-        return true;
     }
 
     /**
