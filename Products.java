@@ -22,7 +22,7 @@ public abstract class Products
     }
 
     /** 
-     * 상품DB에 상품 하나 추가
+     * 상품DB에 상품 추가
      */
     protected static void addToDB(Products p) {
         if (dbCount < DB_MAX) {
@@ -31,10 +31,10 @@ public abstract class Products
     }
 
     /**
-     * 바코드로 상품DB를 검색하여 해당 Products 반환.
+     * 바코드로 상품DB를 검색하여 해당 Products 정보 반환.
      * 없으면 null 반환, 호출부에서 오류 메시지 처리.
      * @param barcode 스캔된 바코드 문자열
-     * @return 해당 Products 객체 또는 null값
+     * @return 해당 Products 객체 정보 또는 null값
      */
     public static Products findByBarcode(long barcode) {
         for (int i = 0; i < dbCount; i++) {
@@ -43,17 +43,6 @@ public abstract class Products
             }
         }
         return null;
-    }
-
-    /**
-     * 등록된 모든 상품 정보를 출력한다.
-     */
-    public static void printDB() {
-        System.out.println("======== 상품 목록 (ProductDB) ========");
-        for (int i = 0; i < dbCount; i++) {
-            productDB[i].printInfo();
-        }
-        System.out.println("=======================================");
     }
 
         public long getBarcode(){

@@ -7,7 +7,7 @@
 public class Sale { 
     private static final int SALEDBMAX  = 100;
     private static Sale[] saleDB = new Sale[SALEDBMAX];
-    private static int saleCount   = 0;
+    private static int saleCount = 0;
     private Products[] cart;
     private int[] quantities;
     private int itemCount;
@@ -31,57 +31,11 @@ public class Sale {
     }
 
     /**
-     * 완료된 Sale 객체를 saleDB에 저장한다.
-     * UCDesc Line 11 — "시스템은 Sale정보를 SaleDB에 저장한다."
-     * 
-     * @param 
-     */ 
-    public boolean addProduct(Products product, int qty) {
-        if (itemCount >= cart.length) {
-            System.out.println("[오류] 더 이상 상품을 추가할 수 없습니다.");
-            return false;
-        }
-        cart[itemCount] = product;
-        quantities[itemCount] = qty;
-        itemCount++;
-        return true;
-    }
-
-    /**
-     * saleDB에 저장된 모든 판매 내역을 출력한다.
-     * 무엇을 얼마나 팔았는지 한눈에 확인 가능.
-     */ 
-    public static void printSaleDB() {   
-        if (saleCount == 0){ 
-            System.out.println("  저장된 판매 내역이 없습니다 "); 
-            return; 
-        } 
-        System.out.println("======== 판매 내역 (SaleDB) ========");
-        for (int i = 0; i < saleCount; i++) {
-            System.out.println("  ▶ 판매 #" + (i + 1));
-            saleDB[i].printReceipt();
-        }
-        System.out.println("총 " + saleCount + "건 판매 완료.");
-        System.out.println("===================================");
-    }
-
-    /** 
-     * 누적 판매 건수 반환 
-     */
-    public static int getSaleCount() { 
-        return saleCount; 
-    }
-
-    /**
      * 이번 판매 목록에 상품을 추가한다.
      * @param product : 추가할 상품 객체
-     * @return 추가 성공 여부
+     * @return 추가 성공
      */
     public boolean addProduct(Products product) {
-        if (itemCount >= cart.length) {
-            System.out.println("[오류] 더 이상 상품을 추가할 수 없습니다.");
-            return false;
-        }
         cart[itemCount++] = product;
         return true;
     }
@@ -125,13 +79,33 @@ public class Sale {
     }
 
     public static void saveDB(Sale sale) {
-        if (saleCount < SALEDBMAX) {
             saleDB[saleCount] = sale;
             saleCount++;
             System.out.println("[시스템] Sale 정보가 SaleDB에 저장되었습니다."
                 + "(누적 판매 건수: " + saleCount + "건)");
-        } else {
-            System.out.println("[경고] SaleDB가 가득 찼습니다.");
+    }
+    
+    /**
+     * 완료된 Sale 객체를 saleDB에 저장한다.
+     * UCDesc Line 11 — 시스템은 Sale정보를 SaleDB에 저장한다.
+     * 
+     * @param 
+     */ 
+    public boolean addProduct(Products product, int qty) {
+        cart[itemCount] = product;
+        quantities[itemCount] = qty;
+        itemCount++;
+        return true;
+    }
+
+    /**
+     * saleDB에 저장된 모든 판매 내역을 출력한다.
+     * 무엇을 얼마나 팔았는지 확인 가능.
+     */
+    public static void printSaleDB(){
+        for (int i = 0; i < saleCount; i++) {
+            System.out.println("  ▶ 판매 #" + (i + 1));
+            saleDB[i].printReceipt();
         }
     }
 

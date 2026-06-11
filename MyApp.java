@@ -9,37 +9,15 @@ import java.util.Scanner;
 public class MyApp {
 
     public static void main(String[] args) {
-        Products.initProductDB();  // 상품 DB 초기화
+        Products.initProductDB();
+
         POST post = new POST();
         Scanner scanner = new Scanner(System.in);
-        int menu;
 
-        System.out.println("POST System  (편의점 POS)");
+        System.out.println("POST System (선문 편의점 POS)");
 
         while (true) {
-            System.out.println("\n[메뉴]");
-            System.out.println("1. 판매 시작");
-            System.out.println("0. 종료");
-            System.out.print("선택: ");
-            menu = scanner.nextInt();
-
-            if (menu == 1) {
-                post.printProductDB();
-            } 
-            else if (menu == 2) {
-                post.runSaleProcess();
-            } 
-            else if (menu == 3) {
-                post.printSaleDB();
-            }
-            else if (menu == 0) {
-                System.out.println("POST 시스템을 종료합니다.");
-                break;
-            }
-            else {
-                System.out.println("올바른 메뉴를 선택하세요.");
-            }
+            post.runSaleProcess();
         }
-
     }
 }
