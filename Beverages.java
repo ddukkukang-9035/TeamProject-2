@@ -21,10 +21,6 @@ public class Beverages extends Products implements TAX{
         addToDB(new Beverages(8800000000006L, "제주삼다수",900));
     }
 
-    /**
-     * 상품세금 적용 전 금액
-     * @return 최종 금액 (원)
-     */
     @Override
     public int getPrice() {
         return price;

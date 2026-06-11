@@ -31,7 +31,7 @@ public class POST {
     }
 
     /**
-     * 바코드 입력 , Products.findByBarcode() 조회 ,cartItems에 추가.
+     * 바코드 입력후 상품 DB에서 상품조회 조회된 상품을 카트에 추가.
      * UCD Line 2~3 반복 구간.
      * @return 계속 스캔해야 하면 true, 0 입력이면 false
      */
