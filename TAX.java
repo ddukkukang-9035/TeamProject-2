@@ -17,9 +17,7 @@ public interface TAX {
     double VATRATE = 0.1;
 
     /**
-     * 세금 계산 메소드
-     * 
-     * @return 세금 금액 (원)
+     * 세금 계산 추상 메소드
      */
-    int calcTax();
+    public abstract int calcTax();
 }

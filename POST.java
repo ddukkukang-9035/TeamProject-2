@@ -12,9 +12,6 @@ public class POST {
      * UCDescription Main Scenario 전체 흐름을 실행한다.
      */
     public void runSaleProcess() {
-        AlcoholicDrinks.initDB();
-        Beverages.initDB();
-
         cartItems = new Sale(100);
         System.out.println("\n========== POST 판매 시작 ==========");
         while (scanProduct()) {
@@ -93,7 +90,7 @@ public class POST {
      */
     public void calcTotalAmount() {
         int total = 0;
-        int[] prices = cartItems.getCartPrices();
+        int[] prices = cartItems.getItemPrices();
         int[] counts = cartItems.getCounts();
         int itemCount = cartItems.getItemCount();
         for (int i = 0; i < itemCount; i++) {
