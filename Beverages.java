@@ -11,7 +11,7 @@ public class Beverages extends Products implements Tax{
     }
 
     @Override
-    public void initDB(){
+    public static void initDB(){
         addToDB(new Beverages(880000000004L, "코카콜라", 1500));
         addToDB(new Beverages(880000000005L, "포카리스웨트", 1800));
         addToDB(new Beverages(880000000006L, "제주삼다수",900));

@@ -17,7 +17,7 @@ public class AlcoholicDrinks extends Products implements Tax{
     }
 
     @Override
-    public void initDB() {
+    public static void initDB() {
         addToDB(new AlcoholicDrinks(880000000001L, "참이슬", AlcoholicDrinks.SOJU,1800));
         addToDB(new AlcoholicDrinks(880000000002L, "카스", AlcoholicDrinks.BEER,2500));
         addToDB(new AlcoholicDrinks(880000000003L, "발렌타인", AlcoholicDrinks.WHISKEY,45000)); 

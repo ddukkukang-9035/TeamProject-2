@@ -1,12 +1,12 @@
 import java.util.Scanner;
 
 /**
- * POST Class  (Point Of Sale Terminal)
- * 비즈니스 로직 전담 클래스.
+ * MyApp 클래스의 설명을 작성하세요.
  *
- * 상품DB는 Products가, 판매DB는 Sale이 각자 관리한다.
- * POST는 두 클래스의 static 메소드를 호출하여 판매 흐름을 조율한다.
+ * @author (작성자 이름)
+ * @version (버전 번호 또는 작성한 날짜)
  */
+
 public class POST {
     private Sale    currentSale;
     private Scanner sc = new Scanner(System.in);

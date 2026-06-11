@@ -82,5 +82,5 @@ public abstract class Products
      * 판매 가능한 상품을 productDB에 등록한다.
      * 추상메서드
      */
-    public abstract void initDB();
+    public static void initDB();
 }
