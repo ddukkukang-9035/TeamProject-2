@@ -9,7 +9,7 @@ public abstract class Products
 {   
     protected static final int DBMAX = 100;
     protected static Products[] productDB = new Products[DBMAX];
-    protected static int dbCount  = 0;
+    protected static int DBCount  = 0;
 
     protected long barcode;
     protected String name;
@@ -20,8 +20,8 @@ public abstract class Products
      * @param product : 서브 클래스에서 생성된 상품 객체
      */
     protected static void addToDB(Products product) {
-        productDB[dbCount] = product;
-        dbCount ++;
+        productDB[DBCount] = product;
+        DBCount ++;
     }
 
     /**
@@ -31,7 +31,7 @@ public abstract class Products
      * @return 해당 Products 객체 정보 또는 null값
      */
     public static Products findByBarcode(long barcode) {
-        for (int i = 0; i < dbCount; i++) {
+        for (int i = 0; i < DBCount; i++) {
             if (productDB[i].barcode == barcode) {
                 return productDB[i];
             }

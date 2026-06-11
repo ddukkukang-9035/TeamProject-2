@@ -59,17 +59,6 @@ public class Sale {
     }
 
     /**
-     * 이번 판매의 판매내역을 saleDB에 저장
-     * 
-     * @param  sale : 이번 판매로 생성된 영수증 정보
-     */
-    public static void saveDB(Sale sale) {
-        saleDB[saleCount] = sale;
-        saleCount++;
-        System.out.println("[시스템] Sale 정보가 SaleDB에 저장되었습니다.(누적 판매 건수: " + saleCount + "건)");
-    }
-
-    /**
      * 장바구니에 상품을 추가한다.
      * 
      * @param name : 상품명
@@ -86,6 +75,17 @@ public class Sale {
         counts[inCartItemCount] = count;
         inCartItemCount++;
         return true;
+    }
+
+    /**
+     * 이번 판매의 판매내역을 saleDB에 저장
+     * 
+     * @param  sale : 이번 판매로 생성된 영수증 정보
+     */
+    public static void saveDB(Sale sale) {
+        saleDB[saleCount] = sale;
+        saleCount++;
+        System.out.println("[시스템] Sale 정보가 SaleDB에 저장되었습니다.(누적 판매 건수: " + saleCount + "건)");
     }
 
     public int getTotalAmount(){ 
