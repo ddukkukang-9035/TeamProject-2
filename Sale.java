@@ -22,7 +22,7 @@ public class Sale {
      * @param sale 저장할 Sale 객체
      */ 
     public static void saveTODB(Sale sale){  
-        if(saleCount < SALEDM_MAX) { 
+        if(saleCount < SALEDB_MAX) { 
             saleDB[saleCount] = sale; 
             saleCount++; 
             System.out.println("[시스템] Sale 정보가 SaleDB에 저장되었습니다." 
@@ -38,7 +38,7 @@ public class Sale {
      */ 
     public static void printSaleDB() {   
         if (saleCount == 0){ 
-            System.out.prinln("  저장된 판매 내역이 없습니다 "); 
+            System.out.println("  저장된 판매 내역이 없습니다 "); 
             return; 
         } 
         System.out.println("======== 판매 내역 (SaleDB) ========");
