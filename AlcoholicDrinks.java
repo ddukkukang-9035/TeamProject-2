@@ -4,7 +4,7 @@
  * @author (작성자 이름)
  * @version (버전 번호 또는 작성한 날짜)
  */
-public class AlcoholicDrinks extends Products implements Tax{
+public class AlcoholicDrinks extends Products implements TAX{
     public static final String SOJU = "소주";
     public static final String BEER = "맥주";
     public static final String WHISKEY = "위스키";
@@ -18,50 +18,48 @@ public class AlcoholicDrinks extends Products implements Tax{
     }
 
     public static void initDB() {
-        addToDB(new AlcoholicDrinks(880000000001L, "참이슬", AlcoholicDrinks.SOJU,1800));
-        addToDB(new AlcoholicDrinks(880000000002L, "카스", AlcoholicDrinks.BEER,2500));
-        addToDB(new AlcoholicDrinks(880000000003L, "발렌타인", AlcoholicDrinks.WHISKEY,45000)); 
+        addToDB(new AlcoholicDrinks(8800000000001L, "참이슬", AlcoholicDrinks.SOJU,1800));
+        addToDB(new AlcoholicDrinks(8800000000002L, "카스", AlcoholicDrinks.BEER,2500));
+        addToDB(new AlcoholicDrinks(8800000000003L, "발렌타인", AlcoholicDrinks.WHISKEY,45000)); 
     }
 
-    /**
-     * 주류세 계산 (주세법 기준 세율 적용)
-     * 과세표준 = 기본가격 × 수량
-     * @return 주류세 금액 (원, 소수점 버림)
-     */
+    public double getTaxRate() {
+        if (drinkType.equals(SOJU)) 
+            return SOJUTAXRATE;
+        if (drinkType.equals(BEER)) 
+            return BEERTAXRATE;
+        if (drinkType.equals(WHISKEY))
+            return WHISKEYTAXRATE;
+        return 0;
+    }
+
+    public int calcAlcoholTax() {
+        return (int)(getPrice() * getTaxRate());
+    }
+
+    public int getVAT() {
+        return (int)(getPrice() * VAT);
+    }
+
     @Override
     public int calcTax() {
-        int alcoholTax = 0;
-
-        if (drinkType.equals(SOJU)) 
-            alcoholTax = (int)(getPrice() * SOJUTAXRATE);
-        else if (drinkType.equals(BEER)) 
-            alcoholTax = (int)(getPrice() * BEERTAXRATE);
-        else if (drinkType.equals(WHISKEY)) 
-            alcoholTax = (int)(getPrice() * WHISKEYTAXRATE);
-
-        int vat = (int)(getPrice() * VAT);
-        return alcoholTax + vat;
+        return calcAlcoholTax() + getVAT();
     }
 
-    /**
-     * 최종 지불 금액 = (기본가격 × 수량) + 주류세
-     * @return 세금 포함 최종 금액 (원)
-     */
     @Override
     public int calcAmount() {
-        int base = getPrice() + calcTax();
-        return base;
+        return getPrice();
     }
 
-    /**
-     * 주류 상품 정보 출력
-     */
     @Override
     public void printInfo() {
-        System.out.println("[주류] " + getName() + " | 단가: " + getPrice() + "원" + " | 수량: "  + " | 합계: " + calcAmount() + "원");
+        int vat = getVAT();
+        int alcoholTax = calcAlcoholTax();
+        int taxableAmount = getPrice() - vat - alcoholTax;
+        System.out.println("[주류] " + getName() + " | 단가: " + getPrice() + "원 | 과세물품가액: " + taxableAmount + "원 | 주류세: " + alcoholTax + "원 | 부가세: " + vat + "원");
     }
 
-    public String getDrinkType() {
+    public String getDrinkType() { 
         return drinkType; 
     }
 }

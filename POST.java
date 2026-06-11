@@ -51,7 +51,8 @@ public class POST {
 
         System.out.print("수량 입력: ");
         int count = scanner.nextInt();
-        cartItems.addProduct(found, count);
+        cartItems.addProduct(found.getName(), found.getPrice(), count);
+
         System.out.println("[추가됨] " + found.getName() + " × " + count + "개");
         return true;
     } 

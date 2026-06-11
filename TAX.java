@@ -5,7 +5,7 @@
  * @author (작성자 이름)
  * @version (버전 번호나 날짜)
  */
-public interface Tax
+public interface TAX
 {
     double SOJUTAXRATE = 0.72;
     double BEERTAXRATE = 0.30;

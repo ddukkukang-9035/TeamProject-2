@@ -4,16 +4,18 @@
  * @author (작성자 이름)
  * @version (버전 번호 또는 작성한 날짜)
  */
-public class Sale { 
-    private static final int SALEDBMAX  = 100;
+public class Sale {
+    private static final int SALEDBMAX = 100;
     private static Sale[] saleDB = new Sale[SALEDBMAX];
     private static int saleCount = 0;
-    private Products[] cart;
+
+    private String[] cartNames;
+    private int[] cartPrices;
     private int[] quantities;
     private int itemCount;
     private int totalAmount;
     private int paidCash;
-    private int change; 
+    private int change;
 
     /**
      * 메소드 예제 - 사용자에 맞게 주석을 바꾸십시오.
@@ -22,7 +24,8 @@ public class Sale {
      * @return    x 와 y의 합
      */
     public Sale(int maxItems) {
-        cart = new Products[maxItems];
+        cartNames = new String[maxItems];
+        cartPrices = new int[maxItems];
         quantities = new int[maxItems];
         itemCount = 0;
         totalAmount = 0;
@@ -36,18 +39,18 @@ public class Sale {
     public void calcTotalAmount() {
         totalAmount = 0;
         for (int i = 0; i < itemCount; i++) {
-            totalAmount += cart[i].calcAmount() * quantities[i];
+            totalAmount += cartPrices[i] * quantities[i];
         }
     }
 
     /**
      * 거스름돈을 계산하고 change 필드에 저장한다.
      * @param paid : 고객이 낸 현금
-     * @return 거스름돈 (음수면 현금 부족)
+     * @return 거스름돈
      */
     public int calcChange(int paid) {
         this.paidCash = paid;
-        this.change   = paid - totalAmount;
+        this.change = paid - totalAmount;
         return this.change;
     }
 
@@ -58,44 +61,42 @@ public class Sale {
     public void printReceipt() {
         System.out.println("-------- 영수증 --------");
         for (int i = 0; i < itemCount; i++) {
-            System.out.println(cart[i].getName() + " | 단가: " + cart[i].getPrice() + "원 | 수량: " + quantities[i] + " | 금액: " + (cart[i].calcAmount() * quantities[i]) + "원");
+            System.out.println("  " + cartNames[i] + " | 단가: " + cartPrices[i] + "원 | 수량: " + quantities[i] + " | 금액: " + (cartPrices[i] * quantities[i]) + "원");
         }
         System.out.println("------------------------");
-        System.out.println("총 금액  : " + totalAmount + "원");
-        System.out.println("받은 현금 : " + paidCash   + "원");
-        System.out.println("거스름돈  : " + change     + "원");
+        int vat = (int)(totalAmount * 0.1);
+        int taxableAmount = totalAmount - vat;
+        System.out.println("과세물품가액 : " + taxableAmount + "원");
+        System.out.println("부가세      : " + vat + "원");
+        System.out.println("총액        : " + totalAmount + "원");
+        System.out.println("받은 현금   : " + paidCash + "원");
+        System.out.println("거스름돈    : " + change + "원");
         System.out.println("------------------------");
     }
 
+    /**
+     * 판매정보 saleDB에 저장
+     */
     public static void saveDB(Sale sale) {
         saleDB[saleCount] = sale;
         saleCount++;
-        System.out.println("[시스템] Sale 정보가 SaleDB에 저장되었습니다."
-            + "(누적 판매 건수: " + saleCount + "건)");
+        System.out.println("[시스템] Sale 정보가 SaleDB에 저장되었습니다.(누적 판매 건수: " + saleCount + "건)");
     }
 
     /**
-     * 완료된 Sale 객체를 saleDB에 저장한다.
-     * UCDesc Line 11 — 시스템은 Sale정보를 SaleDB에 저장한다.
+     * 장바구니에 상품을 추가한다.
      * 
-     * @param 
-     */ 
-    public boolean addProduct(Products product, int count) {
-        cart[itemCount] = product;
+     * @param name : 상품명
+     * @param price : 단가
+     * @param count : 수량
+     * @return 추가 성공 여부
+     */
+    public boolean addProduct(String name, int price, int count) {
+        cartNames[itemCount] = name;
+        cartPrices[itemCount] = price;
         quantities[itemCount] = count;
         itemCount++;
         return true;
-    }
-
-    /**
-     * saleDB에 저장된 모든 판매 내역을 출력한다.
-     * 무엇을 얼마나 팔았는지 확인 가능.
-     */
-    public static void printSaleDB(){
-        for (int i = 0; i < saleCount; i++) {
-            System.out.println("  ▶ 판매 #" + (i + 1));
-            saleDB[i].printReceipt();
-        }
     }
 
     public int getTotalAmount(){ 
@@ -107,14 +108,10 @@ public class Sale {
     }
 
     public int getChange(){
-        return change;      
+        return change;        
     }
 
     public int getItemCount(){
-        return itemCount;  
-    }
-
-    public Products[] getItems(){
-        return cart;       
+        return itemCount;   
     }
 }

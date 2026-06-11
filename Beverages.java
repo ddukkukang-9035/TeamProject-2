@@ -4,7 +4,7 @@
  * @author (작성자 이름)
  * @version (버전 번호 또는 작성한 날짜)
  */
-public class Beverages extends Products implements Tax{
+public class Beverages extends Products implements TAX{
 
     public Beverages(long barcode, String name, int price) {
         this.barcode = barcode;
@@ -16,9 +16,9 @@ public class Beverages extends Products implements Tax{
      * 상품DB에 상품을 추가하는 메서드
      */
     public static void initDB(){
-        addToDB(new Beverages(880000000004L, "코카콜라", 1500));
-        addToDB(new Beverages(880000000005L, "포카리스웨트", 1800));
-        addToDB(new Beverages(880000000006L, "제주삼다수",900));
+        addToDB(new Beverages(8800000000004L, "코카콜라", 1500));
+        addToDB(new Beverages(8800000000005L, "포카리스웨트", 1800));
+        addToDB(new Beverages(8800000000006L, "제주삼다수",900));
     }
 
     /**
@@ -36,7 +36,9 @@ public class Beverages extends Products implements Tax{
      */
     @Override
     public void printInfo() {
-        System.out.println("[음료] " + getName() + " | 단가: " + getPrice() + "원" + " | 수량: " + " | 합계: " + calcAmount() + "원");
+        int vat = calcTax();
+        int taxableAmount = getPrice() - vat;
+        System.out.println("[음료] " + getName() + " | 단가: " + getPrice() + "원 | 과세물품가액: " + taxableAmount + "원 | 부가세: " + vat + "원");
     }
 
     /**
@@ -45,9 +47,9 @@ public class Beverages extends Products implements Tax{
      * @return 세금이 포함된 가격
      */
     @Override
-    public int calcTax(){
-        int base = (int)(getPrice() * VAT);
-        return base;
+    public int calcTax() {
+        int result = (int)(getPrice() * VAT);
+        return result;
     }
 
 }
