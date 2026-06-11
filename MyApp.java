@@ -7,7 +7,6 @@
 
 public class MyApp {
     public static void main(String[] args) {
-        Products.initProductDB();
         POST post = new POST();
         System.out.println("POST System (선문 편의점 POS)");
         post.runSaleProcess();

@@ -78,6 +78,26 @@ public class Sale {
         return true;
     }
 
+    /**
+     * 담긴 모든 상품의 금액을 합산하여 totalAmount를 갱신한다.
+     */
+    public void calcTotalAmount() {
+        totalAmount = 0;
+        for (int i = 0; i < itemCount; i++) {
+            totalAmount += cartPrices[i] * quantities[i];
+        }
+    }
+
+    /**
+     * 거스름돈을 계산하고 change 필드에 저장한다.
+     * @param paid 고객이 낸 현금
+     * @return 거스름돈
+     */
+    public int calcChange(int paid) {
+        this.paidCash = paid;
+        this.change = paid - totalAmount;
+        return this.change;}
+
     public int getTotalAmount(){ 
         return totalAmount; 
     }
