@@ -8,16 +8,15 @@
 public class Beverages extends Products{
     private String category;
     
-    public Beverages(String barcode, String name, String category,
-                     int price, int quantity) {
-        super(barcode, name, price, quantity);
-        this.category = category;
+    public Beverages(long barcode, String name, int price) {
+        super(barcode, name, price);
     }
     
+    @Override
     public static void initDB() {
-        addToDB(new Beverages("B001", "코카콜라", "탄산음료", 1500, 1));
-        addToDB(new Beverages("B002", "포카리스웨트", "이온음료", 1800, 1));
-        addToDB(new Beverages("B003", "제주삼다수", "생수",900, 1));
+        addToDB(new Beverages(880000000004, "코카콜라", 1500));
+        addToDB(new Beverages(880000000005, "포카리스웨트", 1800));
+        addToDB(new Beverages(880000000006, "제주삼다수",900));
     }
     
     /**
@@ -36,6 +35,4 @@ public class Beverages extends Products{
     public void printInfo() {
         System.out.println("[음료] " + getName() + " | 단가: " + getPrice() + "원" + " | 수량: " + getQuantity() + " | 카테고리: " + category + " | 합계: " + calcAmount() + "원");
     }
-
-    public String getCategory() { return category; }
 }
