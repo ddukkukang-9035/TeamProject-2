@@ -16,18 +16,13 @@ public abstract class Products
     protected int price;
     protected int quantity;
 
-    public Products(long barcode, String name, int price) {
-        this.barcode = barcode;
-        this.name = name;
-        this.price = price;
-    }
-
     /** 
      * 상품DB에 상품 추가
      */
-    protected static void addToDB(Products p) {
+    protected static void addToDB(Products product) {
         if (dbCount < DBMAX) {
-            productDB[dbCount++] = p;
+            productDB[dbCount] = product;
+            dbCount ++;
         }
     }
 

@@ -1,4 +1,3 @@
-import java.util.Scanner;
 /**
  * MyApp 클래스의 설명을 작성하세요.
  *
@@ -7,17 +6,10 @@ import java.util.Scanner;
  */
 
 public class MyApp {
-
     public static void main(String[] args) {
         Products.initProductDB();
-
         POST post = new POST();
-        Scanner scanner = new Scanner(System.in);
-
         System.out.println("POST System (선문 편의점 POS)");
-
-        while (true) {
-            post.runSaleProcess();
-        }
+        post.runSaleProcess();
     }
 }

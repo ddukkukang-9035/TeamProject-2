@@ -8,30 +8,30 @@ import java.util.Scanner;
  */
 
 public class POST {
-    private Sale receiptHistory;
+    private Sale cartItems;
     private Scanner scanner = new Scanner(System.in);
         
     /**
      * UCDescription Main Scenario 전체 흐름을 실행한다.
      */
     public void runSaleProcess() {
-        receiptHistory = new Sale(100);
+        cartItems = new Sale(100);
         System.out.println("\n========== POST 판매 시작 ==========");
         while (scanProduct()) {
         }
         
         payment();
         
-        if (receiptHistory == null) {
+        if (cartItems == null) {
             return;
         }
-        receiptHistory.printReceipt();
-        Sale.saveDB(receiptHistory);    
+        cartItems.printReceipt();
+        Sale.saveDB(cartItems);    
         System.out.println("========== 판매 완료 ==========\n");
     }
     
     /**
-     * 바코드 입력 , Products.findByBarcode() 조회 ,receiptHistory에 추가.
+     * 바코드 입력 , Products.findByBarcode() 조회 ,cartItems에 추가.
      * UCD Line 2~3 반복 구간.
      * @return 계속 스캔해야 하면 true, 0 입력이면 false
      */
@@ -50,9 +50,9 @@ public class POST {
         }
 
         System.out.print("수량 입력: ");
-        int qty = scanner.nextInt();
-        receiptHistory.addProduct(found, qty);
-        System.out.println("[추가됨] " + found.getName() + " × " + qty + "개");
+        int count = scanner.nextInt();
+        cartItems.addProduct(found, count);
+        System.out.println("[추가됨] " + found.getName() + " × " + count + "개");
         return true;
     } 
 
@@ -61,19 +61,19 @@ public class POST {
      * UCDe Line 4~9 해당.
      */
     public void payment() {
-        receiptHistory.calcTotalAmount();
-        System.out.println("\n  지불할 금액: " + receiptHistory.getTotalAmount() + "원");
+        cartItems.calcTotalAmount();
+        System.out.println("\n  지불할 금액: " + cartItems.getTotalAmount() + "원");
 
         System.out.print("받은 현금 입력: ");
         int paid = scanner.nextInt();
 
-        if (paid < receiptHistory.getTotalAmount()) {
+        if (paid < cartItems.getTotalAmount()) {
             System.out.println("[취소] 현금이 부족합니다. 판매를 취소합니다.");
-            receiptHistory = null;
+            cartItems = null;
             return;
         }
 
-        int change = receiptHistory.calcChange(paid);
+        int change = cartItems.calcChange(paid);
         System.out.println("거스름돈: " + change + "원");
     }
 }

@@ -8,11 +8,12 @@ public class AlcoholicDrinks extends Products implements Tax{
     public static final String SOJU = "소주";
     public static final String BEER = "맥주";
     public static final String WHISKEY = "위스키";
-    public static final String WINE = "와인";
     private String drinkType;
 
     public AlcoholicDrinks(long barcode, String name, String drinkType, int price) {
-        super(barcode, name, price);
+        this.barcode = barcode; 
+        this.name = name;
+        this.price = price;
         this.drinkType = drinkType;
     }
 
@@ -37,8 +38,6 @@ public class AlcoholicDrinks extends Products implements Tax{
             alcoholTax = (int)(getPrice() * BEERTAXRATE);
         else if (drinkType.equals(WHISKEY)) 
             alcoholTax = (int)(getPrice() * WHISKEYTAXRATE);
-        else if (drinkType.equals(WINE)) 
-            alcoholTax = (int)(getPrice() * WINETAXRATE);
 
         int vat = (int)(getPrice() * VAT);
         return alcoholTax + vat;
@@ -50,8 +49,8 @@ public class AlcoholicDrinks extends Products implements Tax{
      */
     @Override
     public int calcAmount() {
-        int base = getPrice();
-        return base + calcTax();
+        int base = getPrice() + calcTax();
+        return base;
     }
 
     /**
@@ -59,21 +58,10 @@ public class AlcoholicDrinks extends Products implements Tax{
      */
     @Override
     public void printInfo() {
-        System.out.println("[주류] " + getName() + " | 단가: " + getPrice() + "원" + " | 수량: " + " | 주류종류: " + drinkType + " | 세율: " + (int)(getTaxRate() * 100) + "%" + " | 주류세: " + calcTax() + "원" + " | 합계: " + calcAmount() + "원");
+        System.out.println("[주류] " + getName() + " | 단가: " + getPrice() + "원" + " | 수량: "  + " | 합계: " + calcAmount() + "원");
     }
 
     public String getDrinkType() {
         return drinkType; 
-    }
-
-    /**
-     * 현재 주류 종류의 세율 반환
-     */
-    public double getTaxRate() {
-        if (drinkType.equals(SOJU) || drinkType.equals(WHISKEY)) {
-            return SOJUTAXRATE;
-        } else {
-            return BEERTAXRATE;
-        }
     }
 }

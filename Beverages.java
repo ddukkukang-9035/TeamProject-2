@@ -7,9 +7,14 @@
 public class Beverages extends Products implements Tax{
 
     public Beverages(long barcode, String name, int price) {
-        super(barcode, name, price);
+        this.barcode = barcode;
+        this.name = name;
+        this.price = price;
     }
 
+    /**
+     * 상품DB에 상품을 추가하는 메서드
+     */
     public static void initDB(){
         addToDB(new Beverages(880000000004L, "코카콜라", 1500));
         addToDB(new Beverages(880000000005L, "포카리스웨트", 1800));
@@ -17,11 +22,12 @@ public class Beverages extends Products implements Tax{
     }
 
     /**
-     * 최종 지불 금액 = 기본가격 × 수량 (세금 없음)
+     * 상품세금 적용 전 금액 = 기본가격 × 수량
      * @return 최종 금액 (원)
      */
     @Override
     public int calcAmount() {
+        int result = getPrice();
         return getPrice();
     }
 
@@ -34,10 +40,9 @@ public class Beverages extends Products implements Tax{
     }
 
     /**
-     * 메소드 예제 - 사용자에 맞게 주석을 바꾸십시오.
+     * 상품 단가에 세금을 더하는 메서드
      *
-     * @param  y  메소드의 샘플 파라미터
-     * @return    x 와 y의 합
+     * @return 세금이 포함된 가격
      */
     @Override
     public int calcTax(){

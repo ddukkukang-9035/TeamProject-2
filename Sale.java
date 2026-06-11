@@ -80,9 +80,9 @@ public class Sale {
      * 
      * @param 
      */ 
-    public boolean addProduct(Products product, int qty) {
+    public boolean addProduct(Products product, int count) {
         cart[itemCount] = product;
-        quantities[itemCount] = qty;
+        quantities[itemCount] = count;
         itemCount++;
         return true;
     }
