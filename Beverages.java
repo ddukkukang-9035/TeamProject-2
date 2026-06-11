@@ -1,8 +1,8 @@
 /**
- * Beverages 클래스의 설명을 작성하세요.
+ * 음료 상품을 다루는 클래스
  *
- * @author (작성자 이름)
- * @version (버전 번호 또는 작성한 날짜)
+ * @author (2023320010 박성준, 2023320012 강성하, 2023320006 정준영, 2023320029 정지후)
+ * @version (2026.06.11)
  */
 public class Beverages extends Products implements TAX{
 
@@ -22,34 +22,20 @@ public class Beverages extends Products implements TAX{
     }
 
     /**
-     * 상품세금 적용 전 금액 = 기본가격 × 수량
+     * 상품세금 적용 전 금액
      * @return 최종 금액 (원)
      */
     @Override
-    public int calcAmount() {
-        int result = getPrice();
-        return getPrice();
+    public int getPrice() {
+        return price;
     }
 
     /**
-     * 음료수 상품 정보 출력
-     */
-    @Override
-    public void printInfo() {
-        int vat = calcTax();
-        int taxableAmount = getPrice() - vat;
-        System.out.println("[음료] " + getName() + " | 단가: " + getPrice() + "원 | 과세물품가액: " + taxableAmount + "원 | 부가세: " + vat + "원");
-    }
-
-    /**
-     * 상품 단가에 세금을 더하는 메서드
-     *
-     * @return 세금이 포함된 가격
+     * 상품의 세금을 계산하는 메서드
+     * @return 해당 상품의 부가세
      */
     @Override
     public int calcTax() {
-        int result = (int)(getPrice() * VATRATE);
-        return result;
+        return (int)(getPrice() * VATRATE);
     }
-
 }

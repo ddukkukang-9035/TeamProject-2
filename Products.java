@@ -1,8 +1,9 @@
 /**
- * Product 클래스의 설명을 작성하세요.
+ * 상품의 추상클래스
+ * DB를 다루는 클래스
  *
- * @author (작성자 이름)
- * @version (버전 번호 또는 작성한 날짜)
+ * @author (2023320010 박성준, 2023320012 강성하, 2023320006 정준영, 2023320029 정지후)
+ * @version (2026.06.11)
  */
 public abstract class Products
 {   
@@ -17,12 +18,11 @@ public abstract class Products
 
     /** 
      * 상품DB에 상품 등록
+     * @param product : 서브 클래스에서 생성된 상품 객체
      */
     protected static void addToDB(Products product) {
-        if (dbCount < DBMAX) {
-            productDB[dbCount] = product;
-            dbCount ++;
-        }
+        productDB[dbCount] = product;
+        dbCount ++;
     }
 
     /**
@@ -51,14 +51,6 @@ public abstract class Products
     public int getPrice(){ 
         return price;    
     }
-
-    /** 
-     * 최종 지불 금액 계산
-     */
-    public abstract int calcAmount();
-
-    /** 
-     * 상품 정보 한 줄 출력 
-     */
-    public abstract void printInfo();
+    
+    public abstract int calcTax();
 }

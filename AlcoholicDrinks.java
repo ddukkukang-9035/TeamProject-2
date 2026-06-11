@@ -1,8 +1,8 @@
 /**
- * AlcoholicDrinks 클래스의 설명을 작성하세요.
+ * 주류 상품을 다루는 클래스
  *
- * @author (작성자 이름)
- * @version (버전 번호 또는 작성한 날짜)
+ * @author (2023320010 박성준, 2023320012 강성하, 2023320006 정준영, 2023320029 정지후)
+ * @version (2026.06.11)
  */
 public class AlcoholicDrinks extends Products implements TAX{
     public static final String SOJU = "소주";
@@ -17,13 +17,21 @@ public class AlcoholicDrinks extends Products implements TAX{
         this.drinkType = drinkType;
     }
 
+    /**
+     * 상품DB에 상품을 추가하는 메서드
+     */
     public static void initDB() {
         addToDB(new AlcoholicDrinks(8800000000001L, "참이슬", AlcoholicDrinks.SOJU,1800));
         addToDB(new AlcoholicDrinks(8800000000002L, "카스", AlcoholicDrinks.BEER,2500));
         addToDB(new AlcoholicDrinks(8800000000003L, "발렌타인", AlcoholicDrinks.WHISKEY,45000)); 
     }
 
-    public double getTaxRate() {
+    /**
+     * 주류 종류에 따라 다른 주류세를 반환하는 메서드
+     *      
+     * @return 주류별 주류세율
+     */
+    public double getAlcoholicTaxRate() {
         if (drinkType.equals(SOJU)) 
             return SOJUTAXRATE;
         if (drinkType.equals(BEER)) 
@@ -33,30 +41,31 @@ public class AlcoholicDrinks extends Products implements TAX{
         return 0;
     }
 
-    public int calcAlcoholTax() {
-        return (int)(getPrice() * getTaxRate());
-    }
-
-    public int getVAT() {
-        return (int)(getPrice() * VATRATE);
-    }
-
+    /**
+     * 상품의 총 세금을 계산하는 메서드
+     * @return 해당 상품의 부가세
+     */
     @Override
     public int calcTax() {
         return calcAlcoholTax() + getVAT();
     }
 
-    @Override
-    public int calcAmount() {
-        return getPrice();
+    /**
+     * 주류세를 계산하는 메서드
+     *      
+     * @return 주류에 해당하는 주류세
+     */
+    public int calcAlcoholTax() {
+        return (int)(getPrice() * getAlcoholicTaxRate());
     }
 
-    @Override
-    public void printInfo() {
-        int vat = getVAT();
-        int alcoholTax = calcAlcoholTax();
-        int taxableAmount = getPrice() - vat - alcoholTax;
-        System.out.println("[주류] " + getName() + " | 단가: " + getPrice() + "원 | 과세물품가액: " + taxableAmount + "원 | 주류세: " + alcoholTax + "원 | 부가세: " + vat + "원");
+    /**
+     * 상품의 부가가치세를 계산하는 메서드
+     *      
+     * @return 상품의 부가가치세
+     */
+    public int getVAT() {
+        return (int)(getPrice() * VATRATE);
     }
 
     public String getDrinkType() { 

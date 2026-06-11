@@ -1,9 +1,9 @@
 import java.util.Scanner;
 /**
- * MyApp 클래스의 설명을 작성하세요.
+ * 바코드를 입력하고 상품들의 가격, 세금, 거스름돈을 계산하는 클래스
  *
- * @author (작성자 이름)
- * @version (버전 번호 또는 작성한 날짜)
+ * @author (2023320010 박성준, 2023320012 강성하, 2023320006 정준영, 2023320029 정지후)
+ * @version (2026.06.11)
  */
 public class POST {
     private Sale cartItems;
@@ -19,7 +19,9 @@ public class POST {
         System.out.println("\n========== POST 판매 시작 ==========");
         while (scanProduct()) {
         }
+
         payment();
+
         if (cartItems == null) {
             return;
         }
@@ -39,18 +41,19 @@ public class POST {
         if (barcode == 0) {
             return false;
         }
-        Products found = Products.findByBarcode(barcode);   
+        Products found = Products.findByBarcode(barcode);
+        
         if (found == null) {
             System.out.println("[오류] 올바르지 않은 바코드입니다: " + barcode);
             return true;
         }
         System.out.print("수량 입력: ");
         int count = scanner.nextInt();
-        cartItems.addProduct(found.getName(), found.getPrice(), count);
+        cartItems.addProduct(found.getName(), found.getPrice(), found.calcTax(), count);
         System.out.println("[추가됨] " + found.getName() + " × " + count + "개");
-        
+
         if (found instanceof TAX) {
-        TAX taxable = (TAX) found;
+            TAX taxable = (TAX) found;
         }
         return true;
     } 
@@ -61,7 +64,7 @@ public class POST {
      */
     public void payment() {
         calcTotalAmount();
-        System.out.println("\n  지불할 금액: " + cartItems.getTotalAmount() + "원");
+        System.out.println("\n 지불할 금액: " + cartItems.getTotalAmount() + "원");
         System.out.print("받은 현금 입력: ");
         int paid = scanner.nextInt();
         if (paid < cartItems.getTotalAmount()) {
@@ -79,7 +82,7 @@ public class POST {
     public void calcTotalAmount() {
         int total = 0;
         int[] prices = cartItems.getCartPrices();
-        int[] counts = cartItems.getQuantities();
+        int[] counts = cartItems.getCounts();
         int itemCount = cartItems.getItemCount();
         for (int i = 0; i < itemCount; i++) {
             total += prices[i] * counts[i];

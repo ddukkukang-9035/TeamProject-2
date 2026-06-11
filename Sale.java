@@ -1,8 +1,8 @@
 /**
- * Sale 클래스의 설명을 작성하세요.
+ * 상품 판매 정보DB를 다루고 영수증을 작성하고 출력해주는 클래스
  *
- * @author (작성자 이름)
- * @version (버전 번호 또는 작성한 날짜)
+ * @author (2023320010 박성준, 2023320012 강성하, 2023320006 정준영, 2023320029 정지후)
+ * @version (2026.06.11)
  */
 public class Sale {
     private static final int SALEDBMAX = 100;
@@ -11,22 +11,23 @@ public class Sale {
 
     private String[] cartNames;
     private int[] cartPrices;
-    private int[] quantities;
+    private int[] taxes;
+    private int[] counts;
     private int itemCount;
     private int totalAmount;
     private int paidCash;
     private int change;
 
     /**
-     * 메소드 예제 - 사용자에 맞게 주석을 바꾸십시오.
+     * 영수증을 만들기 위해 판매 상품들의 정보를 저장하는 객체 생성
      *
-     * @param  y  메소드의 샘플 파라미터
-     * @return    x 와 y의 합
+     * @param  maxItems : 한 번 구매할 때 가능한 상품 종류 개수
      */
     public Sale(int maxItems) {
         cartNames = new String[maxItems];
         cartPrices = new int[maxItems];
-        quantities = new int[maxItems];
+        taxes = new int[maxItems];
+        counts = new int[maxItems];
         itemCount = 0;
         totalAmount = 0;
         paidCash = 0;
@@ -34,19 +35,23 @@ public class Sale {
     }
 
     /**
-     * 이번 판매의 영수증을 출력한다.
+     * 이번 판매의 영수증을 출력한다
      * UCDesc Line 9 — 영수증 발급
+     * 
      */
     public void printReceipt() {
         System.out.println("-------- 영수증 --------");
         for (int i = 0; i < itemCount; i++) {
-            System.out.println("  " + cartNames[i] + " | 단가: " + cartPrices[i] + "원 | 수량: " + quantities[i] + " | 금액: " + (cartPrices[i] * quantities[i]) + "원");
+            System.out.println("  " + cartNames[i] + " | 단가: " + cartPrices[i] + "원 | 수량: " + counts[i] + " | 금액: " + (cartPrices[i] * counts[i]) + "원");
         }
         System.out.println("------------------------");
-        int vat = (int)(totalAmount * 0.1);
-        int taxableAmount = totalAmount - vat;
+        int totalTax = 0;
+        for (int i = 0; i < itemCount; i++) {
+            totalTax += taxes[i] * counts[i];
+        }
+        int taxableAmount = totalAmount - totalTax;
         System.out.println("과세물품가액 : " + taxableAmount + "원");
-        System.out.println("부가세      : " + vat + "원");
+        System.out.println("부가세      : " + totalTax + "원");
         System.out.println("총액        : " + totalAmount + "원");
         System.out.println("받은 현금   : " + paidCash + "원");
         System.out.println("거스름돈    : " + change + "원");
@@ -54,7 +59,9 @@ public class Sale {
     }
 
     /**
-     * 판매정보 saleDB에 저장
+     * 이번 판매의 판매내역을 saleDB에 저장
+     * 
+     * @param  sale : 이번 판매로 생성된 영수증 정보
      */
     public static void saveDB(Sale sale) {
         saleDB[saleCount] = sale;
@@ -68,12 +75,14 @@ public class Sale {
      * @param name : 상품명
      * @param price : 단가
      * @param count : 수량
+     * 
      * @return 추가 성공 여부
      */
-    public boolean addProduct(String name, int price, int count) {
+    public boolean addProduct(String name, int price, int tax, int count) {
         cartNames[itemCount] = name;
         cartPrices[itemCount] = price;
-        quantities[itemCount] = count;
+        taxes[itemCount] = tax;
+        counts[itemCount] = count;
         itemCount++;
         return true;
     }
@@ -98,8 +107,8 @@ public class Sale {
         return cartPrices; 
     }
 
-    public int[] getQuantities() { 
-        return quantities; 
+    public int[] getCounts() { 
+        return counts; 
     }
 
     public void setTotalAmount(int amount) {
