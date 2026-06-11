@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class POST {
     private Sale cartItems;
     private Scanner scanner = new Scanner(System.in);
-        
+
     /**
      * UCDescription Main Scenario 전체 흐름을 실행한다.
      */
@@ -19,9 +19,9 @@ public class POST {
         System.out.println("\n========== POST 판매 시작 ==========");
         while (scanProduct()) {
         }
-        
+
         payment();
-        
+
         if (cartItems == null) {
             return;
         }
@@ -29,7 +29,17 @@ public class POST {
         Sale.saveDB(cartItems);    
         System.out.println("========== 판매 완료 ==========\n");
     }
-    
+
+    /**
+     * 담긴 모든 상품의 금액을 합산하여 totalAmount를 갱신한다.
+     */
+    public void calcTotalAmount() {
+        totalAmount = 0;
+        for (int i = 0; i < itemCount; i++) {
+            totalAmount += cartPrices[i] * quantities[i];
+        }
+    }
+
     /**
      * 바코드 입력 , Products.findByBarcode() 조회 ,cartItems에 추가.
      * UCD Line 2~3 반복 구간.
