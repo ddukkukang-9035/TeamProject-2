@@ -7,11 +7,10 @@
  */
 public interface Tax
 {
-    // 주류세 세율 상수 (주세법 기준)
-    double SOJU_TAX_RATE = 0.72;  // 소주: 72%
-    double BEER_TAX_RATE = 0.30;  // 맥주: 30%
-    double WHISKEY_TAX_RATE = 0.72;  // 위스키: 72%
-    double WINE_TAX_RATE = 0.30;  // 와인: 30%
+    double SOJU_TAX_RATE = 0.72;
+    double BEER_TAX_RATE = 0.30;
+    double WHISKEY_TAX_RATE = 0.72;
+    double WINE_TAX_RATE = 0.30;
     
     /**
      * 주류세 계산 메소드 (구현 클래스에서 반드시 오버라이딩)
