@@ -56,7 +56,7 @@ public class POST {
      * UCDe Line 4~9 해당.
      */
     public void payment() {
-        cartItems.calcTotalAmount();
+        calcTotalAmount();
         System.out.println("\n  지불할 금액: " + cartItems.getTotalAmount() + "원");
         System.out.print("받은 현금 입력: ");
         int paid = scanner.nextInt();
@@ -65,7 +65,33 @@ public class POST {
             cartItems = null;
             return;
         }
-        int change = cartItems.calcChange(paid);
+        int change = calcChange(paid);
         System.out.println("거스름돈: " + change + "원");
+    }
+
+    /**
+     * 담긴 모든 상품의 금액을 합산하여 totalAmount를 갱신한다.
+     */
+    public void calcTotalAmount() {
+        int total = 0;
+        int[] prices = cartItems.getCartPrices();
+        int[] qtys = cartItems.getQuantities();
+        int itemCount = cartItems.getItemCount();
+        for (int i = 0; i < itemCount; i++) {
+            total += prices[i] * qtys[i];
+        }
+        cartItems.setTotalAmount(total);
+    }
+
+    /**
+     * 거스름돈을 계산하고 change 필드에 저장한다.
+     * @param paid 고객이 낸 현금
+     * @return 거스름돈
+     */
+    public int calcChange(int paid) {
+        cartItems.setPaidCash(paid);
+        int change = paid - cartItems.getTotalAmount();
+        cartItems.setChange(change);
+        return change;
     }
 }
