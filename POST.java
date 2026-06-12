@@ -8,13 +8,13 @@ import java.util.Scanner;
 public class POST {
     private Sale cartItems;
     private Scanner scanner = new Scanner(System.in);
+    
     /**
      * UCDescription Main Scenario 전체 흐름을 실행한다.
      */
     public void runSaleProcess() {
         AlcoholicDrinks.initDB();
         Beverages.initDB();
-
         cartItems = new Sale(100);
         System.out.println("\n========== POST 판매 시작 ==========");
         while (scanProduct()) {
@@ -61,12 +61,11 @@ public class POST {
         System.out.print("수량 입력: ");
 
         int count = scanner.nextInt();
+        TAX texable = (TAX) found;
         cartItems. addProduct(found.getName(), found.getPrice(), found.calcTax(), count);
         System.out.println("[추가됨] " + found.getName() + " × " + count + "개");
 
-        if (found instanceof TAX) {
-            TAX taxable = (TAX) found;
-        }
+        
         return true;
     } 
 
