@@ -61,7 +61,7 @@ public class POST {
         System.out.print("수량 입력: ");
 
         int count = scanner.nextInt();
-        TAX texable = (TAX) found;
+        TAX taxable = (TAX) found;
         cartItems. addProduct(found.getName(), found.getPrice(), found.calcTax(), count);
         System.out.println("[추가됨] " + found.getName() + " × " + count + "개");
 
