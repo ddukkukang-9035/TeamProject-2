@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class POST {
     private Sale cartItems;
     private Scanner scanner = new Scanner(System.in);
-    
+
     /**
      * UCDescription Main Scenario 전체 흐름을 실행한다.
      */
@@ -52,7 +52,7 @@ public class POST {
                 return true;
             }
         }
-        
+
         if (found == null) {
             System.out.println("[오류] 올바르지 않은 바코드입니다: " + barcode);
             return true;
@@ -61,11 +61,13 @@ public class POST {
         System.out.print("수량 입력: ");
 
         int count = scanner.nextInt();
-        TAX taxable = (TAX) found;
-        cartItems. addProduct(found.getName(), found.getPrice(), found.calcTax(), count);
+        int tax = 0;
+        if (found instanceof TAX) {
+            tax = ((TAX) found).calcTax();
+        }
+        cartItems. addProduct(found.getName(), found.getPrice(), tax, count);
         System.out.println("[추가됨] " + found.getName() + " × " + count + "개");
 
-        
         return true;
     } 
 
@@ -104,7 +106,7 @@ public class POST {
     /**
      * 거스름돈을 계산하고 change 필드에 저장한다.
      * @param paid 고객이 낸 현금
-     * @return 거스름돈
+     * @return change : 거스름돈
      */
     public int calcChange(int paid) {
         cartItems.setPaidCash(paid);

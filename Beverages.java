@@ -21,6 +21,10 @@ public class Beverages extends Products implements TAX{
         addToDB(new Beverages(8800000000006L, "제주삼다수",900));
     }
 
+    /**
+     * 가격을 반환하는 메서드
+     * @return price : 상품 가격
+     */
     @Override
     public int getPrice() {
         return price;

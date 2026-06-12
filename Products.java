@@ -39,17 +39,27 @@ public abstract class Products
         return null;
     }
 
+    /**
+     * 상품의 바코드를 반환하는 메서드
+     * @return barcode : 상품 바코드
+     */
     public long getBarcode(){
         return barcode; 
     }
 
+    /**
+     * 상품의 이름을 반환하는 메서드
+     * @return name : 상품명
+     */
     public String getName(){
         return name;   
     }
 
+    /**
+     * 상품의 가격을 반환하는 메서드
+     * @return price : 상품 단가
+     */
     public int getPrice(){ 
         return price;    
     }
-    
-    public abstract int calcTax();
 }

@@ -68,6 +68,10 @@ public class AlcoholicDrinks extends Products implements TAX{
         return (int)(getPrice() * VATRATE);
     }
 
+    /**
+     * 주류 종류를 반환하는 메서드
+     * @return drinkType : 주류 종류 (소주, 맥주, 위스키, 와인)
+     */
     public String getDrinkType() { 
         return drinkType; 
     }

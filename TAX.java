@@ -11,10 +11,10 @@
  */
 
 public interface TAX {
-    double SOJUTAXRATE = 0.72;
-    double BEERTAXRATE = 0.15;
-    double WHISKEYTAXRATE = 0.72;
-    double VATRATE = 0.1;
+    final double SOJUTAXRATE = 0.72;
+    final double BEERTAXRATE = 0.15;
+    final double WHISKEYTAXRATE = 0.72;
+    final double VATRATE = 0.1;
 
     /**
      * 세금 계산 추상 메소드

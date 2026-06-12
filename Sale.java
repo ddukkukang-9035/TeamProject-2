@@ -21,7 +21,7 @@ public class Sale {
     /**
      * 영수증을 만들기 위해 판매 상품들의 정보를 저장하는 객체 생성
      *
-     * @param  maxItems : 한 번 구매할 때 가능한 상품 종류 개수
+     * @param  maxItems : 한 번 구매할 때 가능한 상품 종류 가지수
      */
     public Sale(int maxItems) {
         cartNames = new String[maxItems];
@@ -51,8 +51,8 @@ public class Sale {
         counts[inCartItemCount] = count;
         inCartItemCount++;
     }
-    
-        /**
+
+    /**
      * 이번 판매의 영수증을 출력한다
      * UCDesc Line 9 — 영수증 발급
      * 
@@ -78,7 +78,6 @@ public class Sale {
 
     /**
      * 이번 판매의 판매내역을 saleDB에 저장
-     * 
      * @param  sale : 이번 판매로 생성된 영수증 정보
      */
     public static void saveDB(Sale sale) {
@@ -87,38 +86,74 @@ public class Sale {
         System.out.println("[시스템] Sale 정보가 SaleDB에 저장되었습니다.(누적 판매 건수: " + saleCount + "건)");
     }
 
+    /**
+     * 총 금액을 반환하는 메서드
+     * @return totalAmount : 총 금액
+     */
     public int getTotalAmount(){ 
         return totalAmount; 
     }
 
+    /**
+     * 손님이 지불할 금액을 반환하는 메서드
+     * @return getpaidCash : 손님이 지불할 금액
+     */
     public int getPaidCash(){
         return paidCash;    
     }
 
+    /**
+     * 거스름돈 액수를 반환하는 메서드
+     * @return getChange : 거스름돈 액수
+     */
     public int getChange(){
         return change;        
     }
 
+    /**
+     * 현재 장바구니에 담겨있는 상품 종류 가지수를 반환하는 메서드
+     * @return getInCartItemCount : 장바구니에 담겨있는 상품 종류 가지수
+     */
     public int getInCartItemCount(){
         return inCartItemCount;   
     }
 
+    /**
+     * 장바구니에 담겨있는 모든 상품의 각각의 가격을 배열에 저장하는 메서드
+     * @return itemPrices : 상품가격이 담긴 배열
+     */
     public int[] getItemPrices() { 
         return itemPrices; 
     }
 
+    /**
+     * 상품의 수량을 반환하는 메서드
+     * @return counts : 상품 수량
+     */
     public int[] getCounts() { 
         return counts; 
     }
 
+    /**
+     * 총 금액을 설정하는 메서드
+     * @param amount : 설정할 총 금액
+     */
     public void setTotalAmount(int amount) {
         this.totalAmount = amount; 
     }
 
+    /**
+     * 고객이 낸 현금을 설정하는 메서드
+     * @param paid : 고객이 낸 현금
+     */
     public void setPaidCash(int paid) { 
         this.paidCash = paid; 
     }
 
+    /**
+     * 거스름돈을 설정하는 메서드
+     * @param change : 거스름돈
+     */
     public void setChange(int change) { 
         this.change = change; 
     }
